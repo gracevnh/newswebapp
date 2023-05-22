@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login and Signup</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+        }
+
+        .container > div {
+            flex: 1;
+            padding: 20px;
+        }
+        form label {
+            display: inline-block;
+            width: 100px;
+            margin-bottom: 10px;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="password"] {
+            width: 200px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login/Register</h1>
+    <div class="container">
+        <div class="login">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" name="login-email" required><br>
+
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="login-password" required><br>
+
+                <input type="submit" value="Login">
+            </form>
+        </div>
+        <div class="signup">
+            <h2>Sign Up</h2>
+            <form action="/register" method="POST">
+                <label for="signup-firstName">First Name:</label>
+                <input type="text" id="signup-firstName" name="signup-firstName" required><br>
+
+                <label for="signup-lastName">Last Name:</label>
+                <input type="text" id="signup-lastName" name="signup-lastName" required><br>
+
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" name="signup-email" required><br>
+
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" name="signup-password" required><br>
+
+                <input type="submit" value="Sign Up">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
