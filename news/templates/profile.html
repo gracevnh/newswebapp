@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+
+<!-- profile.html -->
+<h1>Profile</h1>
+<!-- Add this section to display user interests -->
+<h3>Interests:</h3>
+<ul>
+  {% for interest in user.interests %}
+    <li>{{ interest }}</li>
+  {% endfor %}
+</ul>
+
+
+</body>
+</html>

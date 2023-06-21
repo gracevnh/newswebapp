@@ -3,8 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <title>Dashboard</title>
+  <style>
+    .container-wrapper {
+      display: flex;
+    }
+    
+    .container {
+      flex: 1;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-right: 10px;
+    }
+    
+    .container:last-child {
+      margin-right: 0;
+    }
+    
+    .container-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    .article-container {
+      margin-bottom: 20px;
+    }
+    
+    .article-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .article-description {
+      margin-bottom: 5px;
+    }
+    
+    .article-source {
+      color: #666;
+    }
+  </style>
 </head>
 <body>
-<h1>Dashboard</h1>
+  <h1>Dashboard</h1>
+
+  <div class="container-wrapper">
+    <div class="container">
+      <h2 class="container-title">Recent News</h2>
+      <div id="recentNewsContent"></div>
+    </div>
+
+    <div class="container">
+      <h2 class="container-title">For You</h2>
+      <div id="forYouContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const apiKey = 'bfc7174d342c4975aee9702531d29774';
+
+    // Function to fetch recent news
+    function fetchRecentNews() {
+      fetch(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+          const recentNewsContent = document.getElementById('recentNewsContent');
+          const articles = data.articles.slice(0, 10); // Limit to the first 10 articles
+
+          let articlesHTML = '';
+          articles.forEach(article => {
+            articlesHTML += `
+              <div class="article-container">
+                <h3 class="article-title">${article.title}</h3>
+                <p class="article-description">${article.description}</p>
+                <p class="article-source">${article.source.name}</p>
+              </div>
+            `;
+          });
+
+          recentNewsContent.innerHTML = articlesHTML;
+        })
+        .catch(error => {
+          console.error('Error fetching recent news:', error);
+        });
+    }
+
+    // Function to fetch content for you
+    function fetchContentForYou() {
+      fetch('https://api.example.com/content-for-you')
+        .then(response => response.json())
+        .then(data => {
+          const forYouContent = document.getElementById('forYouContent');
+          forYouContent.innerHTML = data.content;
+        })
+        .catch(error => {
+          console.error('Error fetching content for you:', error);
+        });
+    }
+
+    // Call the fetch functions to load the content
+    fetchRecentNews();
+    fetchContentForYou();
+  </script>
 </body>
 </html>

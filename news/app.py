@@ -1,3 +1,4 @@
+from bson import ObjectId
 from flask import Flask, render_template, request, redirect, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo import MongoClient
@@ -66,6 +67,17 @@ def register():
 
     return redirect('/home')
 
+@app.route('/profile')
+def profile():
+    user_id = session.get['user_id']
+    user_data = users.find_one({'_id': ObjectId(user_id)})
+
+    if user_data:
+        user = User(user_data['fname'], user_data['lname'], user_data['email'], user_data['password'],
+                    user_data['interests'], user_data['article_history'])
+        return render_template('profile.html', user=user)
+    else:
+        return redirect('/')
 
 @app.route('/home')
 def dashboard():
